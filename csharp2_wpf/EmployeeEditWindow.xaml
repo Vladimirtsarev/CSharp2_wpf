@@ -1,0 +1,17 @@
+﻿<Window x:Class="csharp2_wpf.EmployeeEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:csharp2_wpf"
+        mc:Ignorable="d"
+        Title="EmployeeEditWindow" Height="250" Width="420">
+    <Grid>
+        <TextBox x:Name="FIOtxtBox" HorizontalAlignment="Center" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="ФИО" VerticalAlignment="Top" Width="382"/>
+        <TextBox x:Name="SalarytxtBox" HorizontalAlignment="Center" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="Оклад" VerticalAlignment="Top" Width="382"/>
+        <TextBox x:Name="AgetxtBox" HorizontalAlignment="Center" Height="23" Margin="10,66,0,0" TextWrapping="Wrap" Text="Возраст" VerticalAlignment="Top" Width="382"/>
+        <ComboBox x:Name="DepartmentcomboBox" HorizontalAlignment="Center" Margin="10,94,0,0" VerticalAlignment="Top" Width="382"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="10,121,0,0" VerticalAlignment="Top" Width="382" Height="88" Click="Button_Click"/>
+
+    </Grid>
+</Window>

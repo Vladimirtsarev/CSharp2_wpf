@@ -9,11 +9,17 @@
     <Grid>
         <ComboBox x:Name="comboBox1" 
                   
-                  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="403"/>
-        <ListView HorizontalAlignment="Left" Height="372" Margin="10,37,0,0" VerticalAlignment="Top" Width="403">
+                  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="403" SelectionChanged="comboBox1_SelectionChanged"/>
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="372" Margin="10,37,0,0" VerticalAlignment="Top" Width="403" MouseDoubleClick="listView1_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Имя" 
+                                    Width="120" />
+                                    
+                    <GridViewColumn Header="Зарплата" Width="150" />
+                                    
+                    <GridViewColumn Header="Возраст" Width="50" />
+                                    
                 </GridView>
             </ListView.View>
         </ListView>
