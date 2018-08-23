@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csharp2_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="431.818" Closing="Window_Closing">
+        Title="MainWindow" Height="450" Width="481.602" Closing="Window_Closing">
     <Grid>
         <ComboBox x:Name="comboBox1" 
                   
@@ -14,15 +14,20 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Имя" 
-                                    Width="120" />
-                                    
-                    <GridViewColumn Header="Зарплата" Width="150" />
-                                    
+                                    Width="120" >
+                        
+                        
+                    </GridViewColumn>
+
+                            <GridViewColumn Header="Зарплата" Width="150" />
+
                     <GridViewColumn Header="Возраст" Width="50" />
-                                    
+
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Ред" HorizontalAlignment="Left" Margin="418,10,0,0" VerticalAlignment="Top" Width="22" RenderTransformOrigin="-0.568,0.485" Height="22"/>
+        <Button Content="Ред" HorizontalAlignment="Left" Margin="418,37,0,0" VerticalAlignment="Top" Width="22" RenderTransformOrigin="-0.568,0.485" Height="22"/>
 
     </Grid>
 </Window>

@@ -27,13 +27,13 @@ namespace csharp2_wpf
             InitializeComponent();
 
             employee = e;
-            id = e.GetId();
+            id = e.ID;
             DepartmentcomboBox.ItemsSource = MainWindow._dep;
 
-            FIOtxtBox.Text = e.GetName();
-            SalarytxtBox.Text = e.GetSalary().ToString();
-            AgetxtBox.Text = e.GetAge().ToString();
-            DepartmentcomboBox.SelectedIndex = e.GetDepId()-1;
+            FIOtxtBox.Text = e.Name;
+            SalarytxtBox.Text = e.Salary.ToString();
+            AgetxtBox.Text = e.Age.ToString();
+            DepartmentcomboBox.SelectedIndex = e.DepID-1;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace csharp2_wpf
             employee = new Employee(id, FIOtxtBox.Text, Convert.ToInt32(SalarytxtBox.Text), Convert.ToByte(AgetxtBox.Text), DepartmentcomboBox.SelectedIndex+1);
             for (int i=0; i<MainWindow._emp.Count;i++)
             {
-                if (MainWindow._emp[i].GetId() == id)
+                if (MainWindow._emp[i].ID == id)
                     MainWindow._emp[i] = employee;
 
 

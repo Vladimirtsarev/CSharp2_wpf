@@ -15,21 +15,55 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using System.ComponentModel;
 
 namespace csharp2_wpf
 {
-    public class Employee
+    public class Employee: INotifyPropertyChanged
     {
-        private int ID { get; set; }
-        private string Name { get; set; }
-        private int Salary { get; set; }
-        private byte Age { get; set; }
-        private int DepID { get; set; }
+        private int _id;
+        
+        public int ID
+        {
+            get => _id;
+            set { _id = value; }
+        }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+            }
+        }
+        private int _salary;
+        public int Salary
+        {
+            get => _salary;
+            set { _salary = value; }
+        }
+        private byte _age;
+        public byte Age
+        {
+            get => _age;
+            set { _age = value; }
+        }
+        private int _depId;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public int DepID
+        {
+            get => _depId;
+            set { _depId = value; }
+        }
 
         public Employee(int Id, string empName, int empSalary, byte empAge, int depId)
         {
             this.ID = Id;
-            this.Name = empName;
+            this._name = empName;
             this.Age = empAge;
             this.Salary = empSalary;
             this.DepID = depId;
@@ -37,44 +71,44 @@ namespace csharp2_wpf
         public Employee(int Id, string empName, int empSalary, byte empAge)
         {
             this.ID = Id;
-            this.Name = empName;
+            this._name = empName;
             this.Age = empAge;
             this.Salary = empSalary;
            
         }
 
-        public override string ToString()
-        {
-            return this.Name;
-        }
-        public string GetName()
-        {
-            return Name;
-        }
-        public int GetSalary()
-        {
-            return Salary;
-        }
-        public byte GetAge()
-        {
-            return Age;
-        }
-        public int GetId()
-        {
-            return ID;
-        }
-        public int GetDepId()
-        {
-            return DepID;
-        }
+        //public override string ToString()
+        //{
+        //    return this._name;
+        //}
+                
         public void SetDep(int depId) { DepID = depId; }
 
     }
-    public class Department
+    public class Department: INotifyPropertyChanged
     {
-        private int ID { get; set; }
-        private string Name { get; set; }
+        private int _id;
+        public int ID
+        {
+            get=>_id;
+            set
+            {
+                _id =value;
+            }
+        }
+        private string _name;
+        public string Name
+        {
+            get=>_name;
+            set
+            {
+                _name =value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+            }
+        }
         public List<int> empList = new List<int>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Department(string depName, int depId)
         {
@@ -88,13 +122,13 @@ namespace csharp2_wpf
         }
         public void AddEmployee(Employee emp)
         {
-            empList.Add(emp.GetId());
+            empList.Add(emp.ID);
         }
 
-        public override string ToString()
-        {
-            return this.Name;
-        }
+        //public override string ToString()
+        //{
+        //    return this.Name;
+        //}
     }
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -194,7 +228,7 @@ namespace csharp2_wpf
         private void EmpToDep(int empId, int depId)
         {
             _dep[depId-1].AddEmployee(empId);
-            _emp[empId-1].SetDep(depId);
+            _emp[empId-1].DepID =depId;
         }
 
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -202,7 +236,7 @@ namespace csharp2_wpf
             List<Employee> eL = new List<Employee>();
             foreach (var item in _emp)// dep[comboBox1.SelectedIndex].empList)
             {
-                if (item.GetDepId()== (comboBox1.SelectedIndex+1))
+                if (item.DepID== (comboBox1.SelectedIndex+1))
                 eL.Add(item);
             }
             listView1.ItemsSource = eL;
@@ -213,7 +247,7 @@ namespace csharp2_wpf
             Employee e1=null;
             foreach (var empl in _emp)
             {
-                if (empl.GetName() == listView1.SelectedItem.ToString())
+                if (empl.Name == listView1.SelectedItem.ToString())
                 {
                     e1 = empl;
                 }
@@ -232,7 +266,7 @@ namespace csharp2_wpf
             sb.Append("ФИО;Оклад;Возраст;Отдел");
             foreach (var item in _emp)
             {
-                sb.Append("\n"+ item.GetName() + ";" + item.GetSalary() + ";" + item.GetAge() + ";" + item.GetDepId());
+                sb.Append("\n"+ item.Name + ";" + item.Salary + ";" + item.Age + ";" + item.DepID);
             }
             return sb.ToString();
         }
