@@ -128,23 +128,23 @@ namespace csharp2_wpf
             int j = 0;
             foreach (string str in eStr)
             {
-                if (!str.Contains("ФИО;"))
+                if (!str.Contains("ФИО;") && !string.IsNullOrEmpty(str) && str != "\n")
                 {
                     string[] str2 = new string[3];
                     str2 = str.Replace("\r", "").Split(';');
-                    _emp.Add(new Employee(++j, str2[0], Convert.ToInt32(str2[1]), Convert.ToByte(str2[2])));
+                    _emp.Add(new Employee(++j, str2[0], Convert.ToInt32(str2[1]), Convert.ToByte(str2[2]), Convert.ToInt32(str2[3])));
                 }
             }
 
-            EmpToDep(1, 1);
-            EmpToDep(2, 1);
-            EmpToDep(3, 1);
-            EmpToDep(4, 2);
-            EmpToDep(5, 2);
-            EmpToDep(6, 2);
-            EmpToDep(7, 3);
-            EmpToDep(8, 3);
-            EmpToDep(9, 3);
+            //EmpToDep(1, 1);
+            //EmpToDep(2, 1);
+            //EmpToDep(3, 1);
+            //EmpToDep(4, 2);
+            //EmpToDep(5, 2);
+            //EmpToDep(6, 2);
+            //EmpToDep(7, 3);
+            //EmpToDep(8, 3);
+            //EmpToDep(9, 3);
 
 
             comboBox1.ItemsSource = _dep;
@@ -224,6 +224,22 @@ namespace csharp2_wpf
             eew.ShowDialog();
 
             
+        }
+
+        private string EmplToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("ФИО;Оклад;Возраст;Отдел");
+            foreach (var item in _emp)
+            {
+                sb.Append("\n"+ item.GetName() + ";" + item.GetSalary() + ";" + item.GetAge() + ";" + item.GetDepId());
+            }
+            return sb.ToString();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            File.WriteAllText("Employees.txt", EmplToString());
         }
     }
 }
