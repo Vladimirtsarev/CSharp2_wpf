@@ -247,7 +247,7 @@ namespace csharp2_wpf
             Employee e1=null;
             foreach (var empl in _emp)
             {
-                if (empl.Name == listView1.SelectedItem.ToString())
+                if (empl.Name == listView1.SelectedItem.ToString())/// Не работает
                 {
                     e1 = empl;
                 }
