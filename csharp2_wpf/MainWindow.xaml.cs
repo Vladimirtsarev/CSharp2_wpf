@@ -16,6 +16,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using System.ComponentModel;
+using System.Data.SqlClient;
 
 namespace csharp2_wpf
 {
@@ -137,12 +138,14 @@ namespace csharp2_wpf
     {
         public static List<Department> _dep = new List<Department>();
         public static List<Employee> _emp = new List<Employee>();
+        private string connectionString = "data source=(LocalDb)\\MSSQLLocalDB;initial catalog=Lesson7;integrated security = True; providerName=\"System.Data.SqlClient\"";
 
         public MainWindow()
         {
             
             InitializeComponent();
-            
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {            connection.Open();}
             ReadFromFile();
             
         }
